@@ -1,0 +1,2 @@
+C:\Users\pavle\source\repos\Notes\Debug\Notes.exe
+C:\Users\pavle\source\repos\Notes\Debug\Notes.pdb
