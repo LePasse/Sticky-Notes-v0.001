@@ -12,11 +12,6 @@
 
 #define MAX_LOADSTRING 100
 #define APPWM_ICONNOTIFY (WM_APP + 1)
-#define IDM_EDUNDO                      1090
-#define IDM_EDCUT                       1091
-#define IDM_EDCOPY                      1092
-#define IDM_EDPASTE                     1093
-#define IDM_EDDEL                       1094
 #define ID_EDITCHILD 100
 
 #pragma warning(disable : 4996)
@@ -33,7 +28,7 @@ struct Config {
 };
 
 // Глобальные переменные:
-HINSTANCE hInst, hNote, hEdit;                             // текущий экземпляр
+HINSTANCE hInst, hNote, hEdit;                  // текущий экземпляр
 WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
 WCHAR szWindowClass[MAX_LOADSTRING];
 HWND hwndForFind;
@@ -72,9 +67,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         50, 50, 200, 100, GetDesktopWindow(), nullptr, hInstance, nullptr);
     EnableWindow(hWnd, TRUE);
 
-    //ShowWindow(hWnd, nCmdShow);
-    //UpdateWindow(hWnd);
-
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NOTES));
 
     MSG msg;
@@ -101,10 +93,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // This text will be shown as the icon's tooltip.
 
     // Show the notification.
-    Shell_NotifyIcon(NIM_ADD, &nid);
-    ///////
-
-    //HFONT hFont = CreateFont(-16,0,	0,	0,	FW_DONTCARE, 0, 0, 0, DEFAULT_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_MODERN | DEFAULT_PITCH, L"Courier New");
+    Shell_NotifyIconW(NIM_ADD, &nid);
 
     // Цикл основного сообщения:
     while (GetMessage(&msg, nullptr, 0, 0))
@@ -122,6 +111,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
+
+    wcex.cbSize = sizeof(WNDCLASSEX);
+
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = LoadProc;
+    wcex.cbClsExtra = 0;
+    wcex.cbWndExtra = 0;
+    wcex.hInstance = hNote;
+    wcex.hIcon = 0;
+    wcex.hCursor = 0;
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName = 0;
+    wcex.lpszClassName = L"Note";
+    wcex.hIconSm = 0;
+
+    RegisterClassExW(&wcex);
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
@@ -153,24 +158,7 @@ void resize(HWND hwnd) {
 
 void LoadSubWindow(char* buff, Config cfg) {
 
-    UnregisterClass(L"Note", hNote);
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-    wcex.lpfnWndProc = LoadProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hNote;
-    wcex.hIcon = 0;
-    wcex.hCursor = 0;
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = 0;
-    wcex.lpszClassName = L"Note";
-    wcex.hIconSm = 0;
-
-    RegisterClassExW(&wcex);
+    //UnregisterClass(L"Note", hNote);
 
     USES_CONVERSION;
     TCHAR* b = A2T(buff);
@@ -181,7 +169,7 @@ void LoadSubWindow(char* buff, Config cfg) {
         WS_EX_TOOLWINDOW | WS_EX_LAYERED,
         L"Note",
         L"Note",
-        WS_CAPTION | WS_SYSMENU | WS_CLIPSIBLINGS | WS_THICKFRAME | WS_VISIBLE,
+        WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_VISIBLE,
         rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top,
         GetDesktopWindow(),
         nullptr,
@@ -207,8 +195,8 @@ void LoadSubWindow(char* buff, Config cfg) {
 
     resize(hwnd);   
 
-    //SendMessage(n.edit, WM_SETFONT, (WPARAM)hFont, TRUE);
-    SendMessage(n.edit, WM_SETTEXT, 0, (LPARAM)b);
+    SendMessageW(n.edit, WM_SETFONT, WPARAM(hFont), TRUE);
+    SendMessageW(n.edit, WM_SETTEXT, 0, (LPARAM)b);
 }
 
 std::string createString(int i) {
@@ -325,6 +313,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE:
+        hFont = CreateFont(18, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+            DEFAULT_PITCH | FF_SWISS, L"Arial");
         loadFiles();
         break;
     case APPWM_ICONNOTIFY:
@@ -355,7 +346,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 bool isWnd(note val) {
-    return (val.edit == hwndForFind || val.window == hwndForFind);
+    return (val.window == hwndForFind);
 }
 
 LRESULT CALLBACK LoadProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -369,10 +360,6 @@ LRESULT CALLBACK LoadProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     switch (message)
     {
-    case WM_CREATE:
-    {
-        
-    }
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
@@ -387,7 +374,6 @@ LRESULT CALLBACK LoadProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             n.locked = !n.locked;
             EnableWindow(n.edit, n.locked);
-            noteWindow.erase(it);
 
             RECT rc;
             GetWindowRect(n.window, &rc);
@@ -396,6 +382,7 @@ LRESULT CALLBACK LoadProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             n.width = rc.right - rc.left;
             n.height = rc.bottom - rc.top;
 
+            noteWindow.erase(it);
             noteWindow.emplace_back(n);
         }
     }

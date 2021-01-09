@@ -1,15 +1,15 @@
 ﻿  Notes.cpp
-C:\Users\pavle\source\repos\Notes\Notes.cpp(147,20): warning C4244: инициализация: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(148,21): warning C4244: инициализация: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(201,13): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(201,28): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(201,53): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(201,85): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(236,38): warning C4101: e: неиспользованная локальная переменная
-C:\Users\pavle\source\repos\Notes\Notes.cpp(266,31): warning C4244: =: преобразование "std::streamoff" в "int", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(281,38): warning C4101: e: неиспользованная локальная переменная
-C:\Users\pavle\source\repos\Notes\Notes.cpp(394,21): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(395,21): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(396,32): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
-C:\Users\pavle\source\repos\Notes\Notes.cpp(397,34): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(158,20): warning C4244: инициализация: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(159,21): warning C4244: инициализация: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(195,13): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(195,28): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(195,53): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(195,85): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(231,38): warning C4101: e: неиспользованная локальная переменная
+C:\Users\pavle\source\repos\Notes\Notes.cpp(261,31): warning C4244: =: преобразование "std::streamoff" в "int", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(276,38): warning C4101: e: неиспользованная локальная переменная
+C:\Users\pavle\source\repos\Notes\Notes.cpp(387,21): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(388,21): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(389,32): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
+C:\Users\pavle\source\repos\Notes\Notes.cpp(390,34): warning C4244: =: преобразование "LONG" в "WORD", возможна потеря данных
   Notes.vcxproj -> C:\Users\pavle\source\repos\Notes\Debug\Notes.exe
